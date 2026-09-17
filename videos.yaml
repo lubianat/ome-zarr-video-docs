@@ -56,3 +56,333 @@ videos:
     tags: [snippets]
     sources:
       bluesky: https://bsky.app/profile/jo-soltwedel.bsky.social/post/3mtbvtpzn2k2s
+
+  - title: "Introduction to OME-NGFF next generation file format"
+    date: "2022-04-29"
+    description: |
+      **Channel:** Global BioImaging
+
+      Presented by Christian Tischer (EMBL).
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=ZxpraxvGsAs
+
+  - title: "Tooling Around the Next-Generation File Format OME-Zarr"
+    date: "2024-06-19"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      From the Workshop ‘Euro-BioImaging’s Guide to FAIR Bioimage Data 2024’ (23 May 2024) Presenter: Buğra Özdemir, Euro-BioImaging Bio-Hub, EMBL Heidelberg, Germany
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=ywsI9ZQKux0
+
+  - title: "Josh Moore: OME2024 NGFF Challenge Results"
+    date: "2024-12-11"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      Josh introduced OME-ZARR, a standardized format for multi-resolution pyramid storage in bioimaging. The OME-ZARR Challenge (OME2204) successfully demonstrated the format's ability to handle and visualize massive datasets. This presentation is linked to this presentation from Global BioImaging…
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=avDwyva674A
+
+  - title: "The Cloud-Optimised Image File Format OME-Zarr"
+    date: "2023-05-02"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      From the Workshop ‘Euro-BioImaging’s Guide to FAIR Bioimage Data’ (28th March, 2023) Presenter: Buğra Özdemir, Euro-BioImaging, EMBL Heidelberg, Germany
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=DeCWV274l0c
+
+  - title: "Zarr | Life Science Lightning Talk | Trevor Manz | Dask Summit 2021"
+    date: "2021-05-17"
+    description: |
+      **Channel:** Dask
+
+      This is a lightning talk on Dask and Zarr given by Trevor Manz at Dask Summit 2021.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=8TlAAZcJnvA
+
+  - title: "Handling huge imaging data with OME-Zarr"
+    date: "2025-12-09"
+    description: |
+      **Channel:** GloBIAS
+
+      presented by David Stansby, Kimberly Meechan, Ruaridh Gollifer, University College London, United Kingdom
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=RlvJXqKjmek
+
+  - title: "How To... Read and Write OME-NGFF Formatted Images"
+    date: "2023-06-23"
+    description: |
+      **Channel:** Scientific Computing Software (HHMI Janelia)
+
+      In this meeting of Janelia's How To... interest group, John Bogovic and Virginia Scarlett discuss tools for working with OME-NGFF-formatted microscopy images.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=FgdBWb_-V3o
+
+  - title: "Matthew Hartley: Image data interoperability with OME-NGFF, RO-Crate and linked data"
+    date: "2024-12-11"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      Global image data sharing is an important long term goal, but requires practical mechanisms for enabling cross-compatibility on which we can build.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=zg4ZOvEzG0I
+
+  - title: "Luca Marconato: \"Bridging the imaging and sequencing world: OME-NGFF-based solution for dealing...\""
+    date: "2022-06-09"
+    description: |
+      **Channel:** Howard Hughes Medical Institute (HHMI)
+
+      Luca Marconato (EMBL) presents "Bridging the imaging and sequencing world: OME-NGFF-based solution for dealing with multi-modal spatial molecular profiles."
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=d-h1aBK5ZH0
+
+  - title: "OME 2022 Viewer landscape for NGFF Morning session"
+    date: "2022-11-10"
+    description: |
+      **Channel:** Open Microscopy Environment
+
+      Intro to 3 sessions 0:00, Viewers intro 5:00, OME-NGFF validator demo 12:43, vizzar demo 18:52, napari demo 21:08, webKnossos demo 29:09, OMERO 35:35, MoBIE 47:37
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=aGCyivrAc1Q
+
+  - title: "Fractal: Open-Source Framework for Bioimage Analysis at scale with OME-Zarr | NGFF session"
+    date: "2025-07-01"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      Speaker: Joel Lüthi, BioVisionCenter
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=6PJUpxvHZ8Q
+
+  - title: "OME-NGFF Workshop (part 1)"
+    date: "2022-05-18"
+    description: |
+      **Channel:** Global BioImaging
+
+      Presented by Christian Tischer (EMBL).
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=EPUQYnE3hDU
+
+  - title: "OME-NGFF: scalable format strategies for interoperable bioimaging data - Joshua Moore, U. of Dundee"
+    date: "2021-07-09"
+    description: |
+      **Channel:** hdf5
+
+      2021 European HDF5 Users Group - July 7, 2021 https://www.hdfgroup.org/hug/europeanhug21/
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=Ez8-LI6IGKI
+
+  - title: "OME 2022 NGFF Metadata Morning session"
+    date: "2022-11-15"
+    description: |
+      **Channel:** Open Microscopy Environment
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=1aqcWaGui6M
+
+  - title: "OME-Zarr Open SciVis Datasets - stag beetle"
+    date: "2025-11-07"
+    description: |
+      **Channel:** Tiago Lubiana
+
+      https://registry.opendata.aws/ome-zarr-open-scivis/
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=d8DibJgxkLs
+
+  - title: "OME 2022 NGFF Metadata Afternoon session"
+    date: "2022-11-15"
+    description: |
+      **Channel:** Open Microscopy Environment
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=rzzonu1Pkf0
+
+  - title: "OME-NGFF Workshop (part 2)"
+    date: "2022-05-18"
+    description: |
+      **Channel:** Global BioImaging
+
+      Presented by Josh Moore (OME).
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=dOjHtnq5E0Y
+
+  - title: "Introduction to next-generation file formats and how to work with OME-Zarr| NGFF session"
+    date: "2025-07-01"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      Speaker: Bugra Özdemir, Euro-BioImaging ERIC
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=9oDjsVPY70I
+
+  - title: "OME 2022 Viewer landscape for NGFF Afternoon session"
+    date: "2022-11-10"
+    description: |
+      **Channel:** Open Microscopy Environment
+
+      Intro 0:00, Viewers intro 6:01, OME-NGFF validator demo 14:22, bioformats2raw layout 21:56, vizzar demo 23:09, napari demo 26:13, MoBIE demo 35:53, itk-vtk-viewer demo 44:39, webKnossos demo 1:01:09, OMERO demo 1:13:37, S3 and OMERO explanation 1:21:50, NGFF converters demo 1:26:35
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=4ea46TuDSkc
+
+  - title: "MicroscopyHackathon - The Standards"
+    date: "2022-04-12"
+    description: |
+      **Channel:** DANDI
+
+      This video introduces the standards used in the two Dandisets used in the hackathon: - BIDS: https://bids-specification.readthedocs.io/ - OME-NGFF: https://ngff.openmicroscopy.org/latest/
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=T1KM2YNCFzI
+
+  - title: "Making BioImage Data FAIR on a Global Scale: Jason Swedlow, 21/08/23"
+    date: "2023-08-22"
+    description: |
+      **Channel:** TIA Warwick
+
+      TIA Centre Seminar Series: Prof. Jason Swedlow
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=h5WdxgRdLqc
+
+  - title: "Towards open and standardised imaging data: an introduction to Bio Formats, OME-TIFF, and OME-Zarr"
+    date: "2025-05-29"
+    description: |
+      **Channel:** EMBL's European Bioinformatics Institute EMBL-EBI
+
+      Microscopy and bioimaging technologies are fundamental tools for exploring biological systems, generating large, multidimensional datasets rich in experimental detail. However, the bioimaging community has historically faced major challenges around data handling: vendor-specific proprietary…
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=2xg8IwKviI4
+
+  - title: "Open ome.zarr files in the BigDataViewer using MoBIE"
+    date: "2021-07-06"
+    description: |
+      **Channel:** Open Microscopy Environment
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=KposKXm7xeg
+
+  - title: "OME-Zarr pan and zoom in glue genes"
+    date: "2023-12-14"
+    description: |
+      **Channel:** Jonathan Foster
+
+      glue genes supports modern multi-resolution image formats. Here a ~60 GB file is smoothly panned and zoomed while remaining entirely on disk.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=bynqV5N6mAE
+
+  - title: "Introduction to ome-zarr and S3 cloud storage"
+    date: "2025-12-17"
+    description: |
+      **Channel:** I2K Conference
+
+      Introduction to ome-zarr and S3 cloud storage | Johannes Soltwedel | November 18th, Halfway to I2K 2025
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=9ZxJ7VqVYS8
+
+  - title: "Exploration and Analysis of Image Data using OME-Zarr"
+    date: "2023-11-07"
+    description: |
+      **Channel:** Euro-BioImaging Communication
+
+      In this Virtual Pub recording, Bugra Özdemir, Euro-BioImaging & Joel Luethi, BioVision Center, University of Zurich, present on "Exploration and Analysis of Image Data using OME-Zarr."
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=7-UNUONphbo
+
+  - title: "OME 2022 OME-Zarr in Java Morning session"
+    date: "2022-11-17"
+    description: |
+      **Channel:** Open Microscopy Environment
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=jf9im8LX8Q8
+
+  - title: "OME 2022 OME-Zarr in Java Afternoon session"
+    date: "2022-11-18"
+    description: |
+      **Channel:** Open Microscopy Environment
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=UnzbwrB6bSk
+
+  - title: "napari navigator streaming demo"
+    date: "2025-08-20"
+    description: |
+      **Channel:** Joel Lüthi
+
+      Showcasing the napari-ome-zarr-navigator (https://github.com/fractal-napari-plugins-collection/napari-ome-zarr-navigator) streaming remote OME-Zarrs via the fractal-data service (https://github.com/fractal-analytics-platform/fractal-data). Also showcasing the napari-feature-visualization…
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=eAzm10Vrhu0
+
+  - title: "John Bogovic: \"A Tour of Chunked Storage with Fiji: N5, HDF5, and Zarr.\""
+    date: "2022-05-09"
+    description: |
+      **Channel:** Howard Hughes Medical Institute (HHMI)
+
+      John Bogovic (Janelia Machine Learning Researcher) presents "A Tour of Chunked Storage with Fiji: N5, HDF5, and Zarr."
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=nYzYiXi0sYs
+
+  - title: "Julia Thönnißen: Balancing Efficiency and Standardization for a Microscopic Image Repository on HPC"
+    date: "2024-04-09"
+    description: |
+      **Channel:** DataLad
+
+      Understanding the human brain is one of the greatest challenges of modern science. In order to study its complex structural and functional organization, data from different modalities and resolutions must be linked together. This requires scalable and reproducible workflows ranging from the…
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=lYAZN9c4WvA
+
+  - title: "Nouveaux format de fichiers : OME-NGFF"
+    date: "2023-10-24"
+    description: |
+      **Channel:** miti rtmfm
+
+      présentation par Guillaume Gay
+    tags: [talks, fr]
+    sources:
+      youtube: https://www.youtube.com/watch?v=O4VZJ_BopeY
+
+  - title: "Installing and using Microscopy Nodes in Blender"
+    date: "2024-10-18"
+    description: |
+      **Channel:** Aafke Gros
+
+      Microscopy Nodes is a Blender add-on for intuitive loading of microscopy data. This video illustrates how to install and use the loading interface, with either tif files or OME-Zarr files.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=ybQcKEqUG8I
+
+  - title: "Multimodal Big Image Data Sharing and Exploration (VIS 2024)"
+    date: "2024-03-22"
+    description: |
+      **Channel:** MoBIE
+
+      References for the video: - Publication about various OME-Zarr tools and viewer: https://link.springer.com/article/10.1007/s00418-023-02209-1 - Tool to create OME-Zarr from many image formats: https://github.com/Euro-BioImaging/BatchConvert - MoBIE Publication:…
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=ZJEdZfBYJQE

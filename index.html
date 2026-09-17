@@ -19,6 +19,7 @@
   .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); }
   section { padding: 0 16px 16px; }
   h2 { font-size: 1.1rem; margin: 8px 0; }
+  .row.grid { flex-wrap: wrap; overflow-x: visible; }
   .row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
   .card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 0; border-radius: 6px; padding: 0; color: inherit; text-align: left; cursor: pointer; overflow: hidden; font: inherit; transition: transform .15s; }
   .card:hover, .card:focus-visible { transform: scale(1.04); }
@@ -180,14 +181,15 @@ function render() {
     .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
   const sections = catalog.sections || [];
   const sectionTags = new Set(sections.map(s => s.tag));
-  const rows = [
+  // A selected tag shows one flat grid instead of the per-section rows.
+  const rows = active ? [[sections.find(s => s.tag === active)?.label || active, vids]] : [
     ...sections.map(s => [s.label, vids.filter(v => (v.tags || []).includes(s.tag))]),
     ['More', vids.filter(v => !(v.tags || []).some(t => sectionTags.has(t)))],
   ].filter(([, list]) => list.length);
   $('#rows').replaceChildren(...rows.map(([label, list]) => {
     const sec = document.createElement('section');
     const h = document.createElement('h2'); h.textContent = label;
-    const row = document.createElement('div'); row.className = 'row';
+    const row = document.createElement('div'); row.className = active ? 'row grid' : 'row';
     row.append(...list.map(card));
     sec.append(h, row);
     return sec;

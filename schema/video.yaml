@@ -1,0 +1,106 @@
+id: https://w3id.org/ome-stream/video
+name: ome_stream_video
+title: OME-Zarr Video Docs catalog
+description: A hand-edited catalog of OME-Zarr documentation videos.
+license: CC0
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ome_stream: https://w3id.org/ome-stream/video/
+default_prefix: ome_stream
+default_range: string
+imports:
+  - linkml:types
+
+classes:
+  Catalog:
+    tree_root: true
+    attributes:
+      sections:
+        range: Section
+        multivalued: true
+        inlined_as_list: true
+      videos:
+        range: Video
+        multivalued: true
+        inlined_as_list: true
+        required: true
+
+  Section:
+    description: A tag that gets its own row in the layout.
+    attributes:
+      tag:
+        required: true
+      label:
+        required: true
+
+  Video:
+    attributes:
+      title:
+        required: true
+      description:
+        description: Markdown.
+      date:
+        range: date
+      tags:
+        multivalued: true
+      sources:
+        range: Sources
+        inlined: true
+        required: true
+
+  Sources:
+    description: >-
+      Where the video lives, as the URL you would paste. Several keys = mirrors.
+      The app tries zenodo, commons, github, imagesc, custom, then youtube.
+    any_of:
+      - slot_conditions: {zenodo: {required: true}}
+      - slot_conditions: {commons: {required: true}}
+      - slot_conditions: {github: {required: true}}
+      - slot_conditions: {imagesc: {required: true}}
+      - slot_conditions: {custom: {required: true}}
+      - slot_conditions: {youtube: {required: true}}
+    attributes:
+      zenodo:
+        range: uri
+        pattern: '^https://zenodo\.org/records/\d+/files/.+'
+      commons:
+        range: uri
+        pattern: '^https://commons\.wikimedia\.org/wiki/File:.+\.(webm|ogv|mp4)$'
+      github:
+        range: uri
+        pattern: '^https://(github\.com|raw\.githubusercontent\.com)/.+'
+      imagesc:
+        range: ImageScFile
+        inlined: true
+      custom:
+        range: WebFile
+        multivalued: true
+        inlined_as_list: true
+      youtube:
+        range: uri
+        pattern: '^https://(www\.)?(youtube\.com/watch\?v=|youtu\.be/)[A-Za-z0-9_-]{11}'
+
+  ImageScFile:
+    description: A video uploaded to the image.sc forum.
+    attributes:
+      file:
+        range: uri
+        required: true
+        pattern: '^https://[^/]*discourse-cdn\.com/.+'
+      post:
+        range: uri
+        required: true
+        pattern: '^https://forum\.image\.sc/'
+        description: Link to the forum thread.
+
+  WebFile:
+    description: A video file anywhere on the web, plus the page that presents it.
+    attributes:
+      file:
+        range: uri
+        required: true
+        pattern: '^https://'
+      page:
+        range: uri
+        required: true
+        pattern: '^https://'

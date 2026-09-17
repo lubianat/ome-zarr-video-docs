@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OME-Zarr Video Docs</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+<style>
+  :root { --bg: #111; --fg: #eee; --muted: #999; --card: #222; --accent: #e50914; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.4 system-ui, sans-serif; }
+  header { padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  h1 { margin: 0; font-size: 1.5rem; color: var(--accent); }
+  input[type=search] { flex: 1; min-width: 180px; padding: 8px; border-radius: 4px; border: 0; background: var(--card); color: var(--fg); }
+  #chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+  .chip { background: var(--card); color: var(--fg); border: 1px solid #444; border-radius: 99px; padding: 2px 10px; cursor: pointer; font: inherit; font-size: .85rem; }
+  .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); }
+  section { padding: 0 16px 16px; }
+  h2 { font-size: 1.1rem; margin: 8px 0; }
+  .row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
+  .card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 0; border-radius: 6px; padding: 0; color: inherit; text-align: left; cursor: pointer; overflow: hidden; font: inherit; transition: transform .15s; }
+  .card:hover, .card:focus-visible { transform: scale(1.04); }
+  .thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: grid; place-items: center; background: #333; color: var(--muted); font-size: 2rem; }
+  .card b { display: block; padding: 6px 8px 0; font-size: .9rem; }
+  .card small { display: block; padding: 0 8px 8px; color: var(--muted); }
+  dialog { width: min(960px, 100%); max-height: 100vh; background: var(--bg); color: var(--fg); border: 1px solid #333; border-radius: 8px; padding: 16px; }
+  dialog::backdrop { background: #000c; }
+  #player { aspect-ratio: 16/9; background: #000; }
+  #player > * { width: 100%; height: 100%; border: 0; }
+  #srcs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; align-items: center; }
+  #desc a, #srcs a { color: #8ab4f8; }
+  .close { float: right; }
+  .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>OME-Zarr Video Docs</h1>
+  <input type="search" id="q" placeholder="Search videos…" aria-label="Search videos">
+  <div id="chips"></div>
+</header>
+<main id="rows"></main>
+<dialog id="dlg">
+  <button class="chip close" id="close" aria-label="Close">✕</button>
+  <h2 id="title"></h2>
+  <div id="player"></div>
+  <div id="srcs"></div>
+  <p class="muted" id="meta"></p>
+  <div id="desc"></div>
+</dialog>
+<script>
+const $ = s => document.querySelector(s);
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const ytId = u => { try { const x = new URL(u); return x.hostname === 'youtu.be' ? x.pathname.slice(1) : x.searchParams.get('v'); } catch { return null; } };
+const commonsFile = u => decodeURIComponent(u.split('/wiki/File:')[1] || '');
+const fmtDate = d => d ? String(d) : '';
+
+// Source keys in pick order. Each returns [{label, kind, src, page}].
+const SOURCES = [
+  ['zenodo', u => {
+    const m = u.match(/^https:\/\/zenodo\.org\/records\/(\d+)\/files\/([^?#]+)/);
+    return m ? [{ label: 'Zenodo', kind: 'video', src: `https://zenodo.org/api/records/${m[1]}/files/${m[2]}/content`, page: `https://zenodo.org/records/${m[1]}` }] : [];
+  }],
+  ['commons', u => [{ label: 'Commons', kind: 'video', src: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(commonsFile(u))}`, page: u }]],
+  ['github', u => [{ label: 'GitHub', kind: 'video',
+    src: u.replace(/^https:\/\/github\.com\/([^/]+\/[^/]+)\/(?:blob|raw)\//, 'https://raw.githubusercontent.com/$1/'),
+    page: u.replace(/^https:\/\/raw\.githubusercontent\.com\/([^/]+\/[^/]+)\//, 'https://github.com/$1/blob/') }]],
+  ['imagesc', d => [{ label: 'image.sc', kind: 'video', src: d.file, page: d.post }]],
+  ['custom', list => list.map((w, i) => ({ label: `Web ${i + 1}`, kind: 'video', src: w.file, page: w.page }))],
+  ['youtube', u => { const id = ytId(u); return id ? [{ label: 'YouTube', kind: 'iframe', src: `https://www.youtube-nocookie.com/embed/${id}`, page: u }] : []; }],
+];
+const sourcesOf = v => SOURCES.flatMap(([k, f]) => v.sources?.[k] ? f(v.sources[k]) : []);
+
+function thumb(v) {
+  const s = v.sources || {};
+  const id = s.youtube && ytId(s.youtube);
+  const url = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+    : s.commons ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(commonsFile(s.commons))}?width=320`
+    : null;
+  if (url) { const img = document.createElement('img'); img.className = 'thumb'; img.loading = 'lazy'; img.alt = ''; img.src = url; return img; }
+  const d = document.createElement('div'); d.className = 'thumb'; d.textContent = '▶'; return d;
+}
+
+function card(v) {
+  const b = document.createElement('button');
+  b.className = 'card';
+  const t = document.createElement('b'); t.textContent = v.title;
+  const d = document.createElement('small'); d.textContent = [fmtDate(v.date), sourcesOf(v).map(s => s.label).join(', ')].filter(Boolean).join(' · ');
+  b.append(thumb(v), t, d);
+  b.onclick = () => { location.hash = slug(v.title); };
+  return b;
+}
+
+function play(list, i) {
+  const player = $('#player');
+  player.replaceChildren();
+  const s = list[i];
+  if (!s) { player.textContent = 'No playable source.'; return; }
+  const node = document.createElement(s.kind);
+  node.src = s.src;
+  if (s.kind === 'video') {
+    node.controls = true; node.autoplay = true; node.preload = 'metadata';
+    node.onerror = () => play(list, i + 1); // ponytail: auto-advance only works for <video>; iframes use the switcher
+  } else {
+    node.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    node.allowFullscreen = true;
+    node.title = 'Video player';
+  }
+  player.append(node);
+  const srcs = $('#srcs');
+  srcs.replaceChildren('Sources: ');
+  list.forEach((x, j) => {
+    const c = document.createElement('button');
+    c.className = 'chip'; c.textContent = x.label; c.setAttribute('aria-pressed', j === i);
+    c.onclick = () => play(list, j);
+    srcs.append(c);
+  });
+  const a = document.createElement('a');
+  a.href = s.page; a.target = '_blank'; a.rel = 'noopener'; a.textContent = `view on ${s.label.replace(/ \d+$/, '')} ↗`;
+  srcs.append(a);
+}
+
+function openVideo(v) {
+  $('#title').textContent = v.title;
+  $('#meta').textContent = [fmtDate(v.date), (v.tags || []).map(t => '#' + t).join(' ')].filter(Boolean).join(' · ');
+  $('#desc').innerHTML = DOMPurify.sanitize(marked.parse(v.description || ''));
+  play(sourcesOf(v), 0);
+  if (!$('#dlg').open) $('#dlg').showModal();
+}
+
+let catalog, active = null;
+
+function render() {
+  const q = $('#q').value.toLowerCase();
+  const vids = catalog.videos
+    .filter(v => !active || (v.tags || []).includes(active))
+    .filter(v => !q || [v.title, v.description, ...(v.tags || [])].join(' ').toLowerCase().includes(q))
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  const sections = catalog.sections || [];
+  const sectionTags = new Set(sections.map(s => s.tag));
+  const rows = [
+    ...sections.map(s => [s.label, vids.filter(v => (v.tags || []).includes(s.tag))]),
+    ['More', vids.filter(v => !(v.tags || []).some(t => sectionTags.has(t)))],
+  ].filter(([, list]) => list.length);
+  $('#rows').replaceChildren(...rows.map(([label, list]) => {
+    const sec = document.createElement('section');
+    const h = document.createElement('h2'); h.textContent = label;
+    const row = document.createElement('div'); row.className = 'row';
+    row.append(...list.map(card));
+    sec.append(h, row);
+    return sec;
+  }));
+  if (!rows.length) $('#rows').textContent = 'No videos match.';
+}
+
+function renderChips() {
+  const tags = [...new Set(catalog.videos.flatMap(v => v.tags || []))].sort();
+  $('#chips').replaceChildren(...tags.map(t => {
+    const c = document.createElement('button');
+    c.className = 'chip'; c.textContent = t; c.setAttribute('aria-pressed', t === active);
+    c.onclick = () => { active = active === t ? null : t; renderChips(); render(); };
+    return c;
+  }));
+}
+
+function onHash() {
+  const v = catalog.videos.find(v => slug(v.title) === location.hash.slice(1));
+  if (v) openVideo(v); else if ($('#dlg').open) $('#dlg').close();
+}
+
+$('#close').onclick = () => $('#dlg').close();
+$('#dlg').addEventListener('close', () => {
+  $('#player').replaceChildren();
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+});
+$('#q').oninput = render;
+addEventListener('hashchange', onHash);
+
+fetch('videos.yaml')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(t => {
+    catalog = jsyaml.load(t, { schema: jsyaml.JSON_SCHEMA }); // ponytail: JSON schema keeps dates as strings
+    catalog.videos ||= [];
+    renderChips(); render(); onHash();
+  })
+  .catch(e => { $('#rows').textContent = 'Failed to load catalog: ' + e.message; });
+</script>
+</body>
+</html>

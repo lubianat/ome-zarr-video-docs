@@ -41,7 +41,8 @@ Bluesky URLs work with a handle or a `did:`; handles can change, DIDs don't.
 ## Sections
 
 Tags listed under `sections:` get their own row (in that order). Videos without
-any section tag land in "More". Other tags are still filterable via the chips.
+any section tag land in "More". Section tags are also the filter chips at the top;
+other tags are still found by search.
 
 ## Run locally / deploy
 

@@ -196,7 +196,7 @@ function render() {
 }
 
 function renderChips() {
-  const tags = [...new Set(catalog.videos.flatMap(v => v.tags || []))].sort();
+  const tags = (catalog.sections || []).map(s => s.tag); // ponytail: only section tags are pinned as chips
   $('#chips').replaceChildren(...tags.map(t => {
     const c = document.createElement('button');
     c.className = 'chip'; c.textContent = t; c.setAttribute('aria-pressed', t === active);

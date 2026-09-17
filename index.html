@@ -231,15 +231,17 @@ function render() {
     .sort(SORTS[$('#sort').value]);
   const sections = catalog.sections || [];
   const sectionTags = new Set(sections.map(s => s.tag));
-  // A selected tag shows one flat grid instead of the per-section rows.
-  const rows = active ? [[sections.find(s => s.tag === active)?.label || active, vids]] : [
+  // A selected tag or a search shows one flat grid instead of the per-section rows.
+  const flat = active || q;
+  const tagLabel = active && (sections.find(s => s.tag === active)?.label || active);
+  const rows = (flat ? [[q ? `${tagLabel || 'Results'} (${vids.length})` : tagLabel, vids]] : [
     ...sections.map(s => [s.label, vids.filter(v => (v.tags || []).includes(s.tag))]),
     ['More', vids.filter(v => !(v.tags || []).some(t => sectionTags.has(t)))],
-  ].filter(([, list]) => list.length);
+  ]).filter(([, list]) => list.length);
   $('#rows').replaceChildren(...rows.map(([label, list]) => {
     const sec = document.createElement('section');
     const h = document.createElement('h2'); h.textContent = label;
-    const row = document.createElement('div'); row.className = active ? 'row grid' : 'row';
+    const row = document.createElement('div'); row.className = flat ? 'row grid' : 'row';
     row.append(...list.map(card));
     sec.append(h, row);
     return sec;

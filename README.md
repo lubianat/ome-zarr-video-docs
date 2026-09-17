@@ -26,14 +26,17 @@ Copy a block in `videos.yaml`:
       custom:
         - file: https://example.org/talk.mp4
           page: https://example.org/talks/42  # required
+      bluesky: https://bsky.app/profile/someone.bsky.social/post/xxxxxxxxxxxxx
       youtube: https://www.youtube.com/watch?v=XXXXXXXXXXX
 ```
 
 Several sources = mirrors. The player tries them in this order:
-**zenodo → commons → github → imagesc → custom → youtube**, moving on
+**zenodo → commons → github → imagesc → custom → bluesky → youtube**, moving on
 automatically if a file fails to load. Viewers can also switch by hand.
 Every source links to its landing page (Zenodo record, Commons file page,
-GitHub page, image.sc thread, `page`, YouTube watch page), never just the raw file.
+GitHub page, image.sc thread, `page`, Bluesky post, YouTube watch page), never just the raw file.
+
+Bluesky URLs work with a handle or a `did:`; handles can change, DIDs don't.
 
 ## Sections
 

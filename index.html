@@ -69,8 +69,33 @@ const SOURCES = [
     page: u.replace(/^https:\/\/raw\.githubusercontent\.com\/([^/]+\/[^/]+)\//, 'https://github.com/$1/blob/') }]],
   ['imagesc', d => [{ label: 'image.sc', kind: 'video', src: d.file, page: d.post }]],
   ['custom', list => list.map((w, i) => ({ label: `Web ${i + 1}`, kind: 'video', src: w.file, page: w.page }))],
+  ['bluesky', u => [{ label: 'Bluesky', kind: 'hls', resolve: () => bsky(u).then(e => e.playlist), page: u }]],
   ['youtube', u => { const id = ytId(u); return id ? [{ label: 'YouTube', kind: 'iframe', src: `https://www.youtube-nocookie.com/embed/${id}`, page: u }] : []; }],
 ];
+// Bluesky: post URL -> video embed ({playlist, thumbnail}) via the public API, once per post.
+const BSKY = 'https://public.api.bsky.app/xrpc/';
+const bskyCache = new Map();
+const getJson = u => fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+function bsky(url) {
+  if (!bskyCache.has(url)) bskyCache.set(url, (async () => {
+    const [, actor, rkey] = url.match(/\/profile\/([^/]+)\/post\/([^/?#]+)/);
+    const did = actor.startsWith('did:') ? actor
+      : (await getJson(`${BSKY}com.atproto.identity.resolveHandle?handle=${encodeURIComponent(actor)}`)).did;
+    const { posts } = await getJson(`${BSKY}app.bsky.feed.getPosts?uris=${encodeURIComponent(`at://${did}/app.bsky.feed.post/${rkey}`)}`);
+    const e = posts[0]?.embed;
+    const video = e?.playlist ? e : e?.media; // media: video post with a quote
+    if (!video?.playlist) throw new Error('no video in post');
+    return video;
+  })());
+  return bskyCache.get(url);
+}
+let hlsLib; // ponytail: loaded only when a Bluesky video plays
+const loadHls = () => hlsLib ||= new Promise((ok, fail) => {
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
+  s.onload = () => ok(window.Hls); s.onerror = fail;
+  document.head.append(s);
+});
 const sourcesOf = v => SOURCES.flatMap(([k, f]) => v.sources?.[k] ? f(v.sources[k]) : []);
 
 function thumb(v) {
@@ -79,8 +104,11 @@ function thumb(v) {
   const url = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg`
     : s.commons ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(commonsFile(s.commons))}?width=320`
     : null;
-  if (url) { const img = document.createElement('img'); img.className = 'thumb'; img.loading = 'lazy'; img.alt = ''; img.src = url; return img; }
-  const d = document.createElement('div'); d.className = 'thumb'; d.textContent = '▶'; return d;
+  const img = document.createElement('img'); img.className = 'thumb'; img.loading = 'lazy'; img.alt = '';
+  if (url) { img.src = url; return img; }
+  const d = document.createElement('div'); d.className = 'thumb'; d.textContent = '▶';
+  if (s.bluesky) bsky(s.bluesky).then(e => { img.src = e.thumbnail; d.replaceWith(img); }).catch(() => {});
+  return d;
 }
 
 function card(v) {
@@ -98,12 +126,24 @@ function play(list, i) {
   player.replaceChildren();
   const s = list[i];
   if (!s) { player.textContent = 'No playable source.'; return; }
-  const node = document.createElement(s.kind);
-  node.src = s.src;
-  if (s.kind === 'video') {
+  const node = document.createElement(s.kind === 'iframe' ? 'iframe' : 'video');
+  const next = () => { if (node.isConnected) play(list, i + 1); };
+  if (node.tagName === 'VIDEO') {
     node.controls = true; node.autoplay = true; node.preload = 'metadata';
-    node.onerror = () => play(list, i + 1); // ponytail: auto-advance only works for <video>; iframes use the switcher
+    node.onerror = next; // ponytail: auto-advance only works for <video>; iframes use the switcher
+  }
+  if (s.kind === 'video') node.src = s.src;
+  else if (s.kind === 'hls') {
+    s.resolve().then(async src => {
+      if (node.canPlayType('application/vnd.apple.mpegurl')) { node.src = src; return; }
+      const Hls = await loadHls();
+      const hls = new Hls();
+      hls.on(Hls.Events.ERROR, (_, d) => { if (d.fatal) { hls.destroy(); next(); } });
+      hls.loadSource(src); hls.attachMedia(node);
+      node.addEventListener('emptied', () => { if (!node.isConnected) hls.destroy(); });
+    }).catch(next);
   } else {
+    node.src = s.src;
     node.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     node.allowFullscreen = true;
     node.title = 'Video player';

@@ -34,3 +34,15 @@ videos:
       imagesc:
         file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/9/8/98debd528c181be8d13935b6c620fb61e9727bf9.mp4
         post: https://forum.image.sc/t/ngff-weekly-dev-update-thread/110810/108
+
+  - title: Opening OME-Zarr v0.5 from IDR in Fiji (n5 alpha)
+    date: "2026-03-13"
+    description: |
+      John Bogovic demos alpha releases of **n5-ij** and **n5-viewer**, which add reading
+      Zarr v3 / OME-Zarr v0.5 and writing via `File > Save As > Export HDF5/N5/Zarr/OME-NGFF ...`.
+      Here: opening 5D OME-Zarr v0.5 data from IDR.
+    tags: [snippets, tools]
+    sources:
+      imagesc:
+        file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/0/2/02d964ca583a1efb98b3a7f3e50f4c634f7fc2fb.webm
+        post: https://forum.image.sc/t/ngff-weekly-dev-update-thread/110810/75

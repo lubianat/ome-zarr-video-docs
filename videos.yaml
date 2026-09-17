@@ -1,8 +1,9 @@
 # Catalog. Edit by hand; schema: schema/video.yaml
 sections:
-  - {tag: talks, label: Talks}
+  - {tag: demos, label: Demos}
+  - {tag: tools, label: Tools}
   - {tag: snippets, label: Snippets}
-  - {tag: tutorials, label: Tutorials}
+  - {tag: talks, label: Talks}
 
 videos:
   - title: OME-Zarr in Fiji
@@ -20,7 +21,7 @@ videos:
     description: |
       Ryan Abernathey and Joe Hamman (Earthmover) present Arraylake, a cloud-native
       data lake for weather and climate data built on **Zarr**, with version control.
-    tags: [talks, zarr]
+    tags: [talks, zarr, cloud]
     sources:
       zenodo: https://zenodo.org/records/8423706/files/Earthmover_Oct2023.mp4
 
@@ -29,7 +30,7 @@ videos:
     description: |
       Johannes Soltwedel converts a multimodal dataset (CT, dose simulation, registered MRI,
       atlas labels, histology) into OME-Zarr 0.6 scene graphs to show transformation graphs in practice.
-    tags: [snippets, datasets]
+    tags: [snippets, demos, datasets]
     sources:
       imagesc:
         file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/9/8/98debd528c181be8d13935b6c620fb61e9727bf9.mp4
@@ -41,7 +42,7 @@ videos:
       John Bogovic demos alpha releases of **n5-ij** and **n5-viewer**, which add reading
       Zarr v3 / OME-Zarr v0.5 and writing via `File > Save As > Export HDF5/N5/Zarr/OME-NGFF ...`.
       Here: opening 5D OME-Zarr v0.5 data from IDR.
-    tags: [snippets, tools]
+    tags: [snippets, demos, tools]
     sources:
       imagesc:
         file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/0/2/02d964ca583a1efb98b3a7f3e50f4c634f7fc2fb.webm
@@ -53,7 +54,7 @@ videos:
       Johannes Soltwedel shows `projectAxis` transforms from the latest OME-Zarr spec:
       projecting images into higher dimensions (2D → 3D).
       Dataset from [rodare.hzdr.de/record/3131](https://rodare.hzdr.de/record/3131).
-    tags: [snippets]
+    tags: [snippets, demos]
     sources:
       bluesky: https://bsky.app/profile/jo-soltwedel.bsky.social/post/3mtbvtpzn2k2s
 
@@ -73,7 +74,7 @@ videos:
       **Channel:** Euro-BioImaging Communication
 
       From the Workshop ‘Euro-BioImaging’s Guide to FAIR Bioimage Data 2024’ (23 May 2024) Presenter: Buğra Özdemir, Euro-BioImaging Bio-Hub, EMBL Heidelberg, Germany
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=ywsI9ZQKux0
 
@@ -103,7 +104,7 @@ videos:
       **Channel:** Dask
 
       This is a lightning talk on Dask and Zarr given by Trevor Manz at Dask Summit 2021.
-    tags: [talks]
+    tags: [talks, zarr]
     sources:
       youtube: https://www.youtube.com/watch?v=8TlAAZcJnvA
 
@@ -113,7 +114,7 @@ videos:
       **Channel:** GloBIAS
 
       presented by David Stansby, Kimberly Meechan, Ruaridh Gollifer, University College London, United Kingdom
-    tags: [talks]
+    tags: [talks, tutorials]
     sources:
       youtube: https://www.youtube.com/watch?v=RlvJXqKjmek
 
@@ -123,7 +124,7 @@ videos:
       **Channel:** Scientific Computing Software (HHMI Janelia)
 
       In this meeting of Janelia's How To... interest group, John Bogovic and Virginia Scarlett discuss tools for working with OME-NGFF-formatted microscopy images.
-    tags: [talks]
+    tags: [talks, tutorials, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=FgdBWb_-V3o
 
@@ -153,7 +154,7 @@ videos:
       **Channel:** Open Microscopy Environment
 
       Intro to 3 sessions 0:00, Viewers intro 5:00, OME-NGFF validator demo 12:43, vizzar demo 18:52, napari demo 21:08, webKnossos demo 29:09, OMERO 35:35, MoBIE 47:37
-    tags: [talks]
+    tags: [talks, tools, demos]
     sources:
       youtube: https://www.youtube.com/watch?v=aGCyivrAc1Q
 
@@ -163,7 +164,7 @@ videos:
       **Channel:** Euro-BioImaging Communication
 
       Speaker: Joel Lüthi, BioVisionCenter
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=6PJUpxvHZ8Q
 
@@ -173,7 +174,7 @@ videos:
       **Channel:** Global BioImaging
 
       Presented by Christian Tischer (EMBL).
-    tags: [talks]
+    tags: [talks, tutorials]
     sources:
       youtube: https://www.youtube.com/watch?v=EPUQYnE3hDU
 
@@ -201,7 +202,7 @@ videos:
       **Channel:** Tiago Lubiana
 
       https://registry.opendata.aws/ome-zarr-open-scivis/
-    tags: [talks]
+    tags: [snippets, demos, datasets]
     sources:
       youtube: https://www.youtube.com/watch?v=d8DibJgxkLs
 
@@ -219,7 +220,7 @@ videos:
       **Channel:** Global BioImaging
 
       Presented by Josh Moore (OME).
-    tags: [talks]
+    tags: [talks, tutorials]
     sources:
       youtube: https://www.youtube.com/watch?v=dOjHtnq5E0Y
 
@@ -229,7 +230,7 @@ videos:
       **Channel:** Euro-BioImaging Communication
 
       Speaker: Bugra Özdemir, Euro-BioImaging ERIC
-    tags: [talks]
+    tags: [talks, tutorials]
     sources:
       youtube: https://www.youtube.com/watch?v=9oDjsVPY70I
 
@@ -239,7 +240,7 @@ videos:
       **Channel:** Open Microscopy Environment
 
       Intro 0:00, Viewers intro 6:01, OME-NGFF validator demo 14:22, bioformats2raw layout 21:56, vizzar demo 23:09, napari demo 26:13, MoBIE demo 35:53, itk-vtk-viewer demo 44:39, webKnossos demo 1:01:09, OMERO demo 1:13:37, S3 and OMERO explanation 1:21:50, NGFF converters demo 1:26:35
-    tags: [talks]
+    tags: [talks, tools, demos]
     sources:
       youtube: https://www.youtube.com/watch?v=4ea46TuDSkc
 
@@ -277,7 +278,7 @@ videos:
     date: "2021-07-06"
     description: |
       **Channel:** Open Microscopy Environment
-    tags: [talks]
+    tags: [demos, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=KposKXm7xeg
 
@@ -287,7 +288,7 @@ videos:
       **Channel:** Jonathan Foster
 
       glue genes supports modern multi-resolution image formats. Here a ~60 GB file is smoothly panned and zoomed while remaining entirely on disk.
-    tags: [talks]
+    tags: [snippets, demos, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=bynqV5N6mAE
 
@@ -297,7 +298,7 @@ videos:
       **Channel:** I2K Conference
 
       Introduction to ome-zarr and S3 cloud storage | Johannes Soltwedel | November 18th, Halfway to I2K 2025
-    tags: [talks]
+    tags: [talks, tutorials, cloud]
     sources:
       youtube: https://www.youtube.com/watch?v=9ZxJ7VqVYS8
 
@@ -307,7 +308,7 @@ videos:
       **Channel:** Euro-BioImaging Communication
 
       In this Virtual Pub recording, Bugra Özdemir, Euro-BioImaging & Joel Luethi, BioVision Center, University of Zurich, present on "Exploration and Analysis of Image Data using OME-Zarr."
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=7-UNUONphbo
 
@@ -315,7 +316,7 @@ videos:
     date: "2022-11-17"
     description: |
       **Channel:** Open Microscopy Environment
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=jf9im8LX8Q8
 
@@ -323,7 +324,7 @@ videos:
     date: "2022-11-18"
     description: |
       **Channel:** Open Microscopy Environment
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=UnzbwrB6bSk
 
@@ -333,7 +334,7 @@ videos:
       **Channel:** Joel Lüthi
 
       Showcasing the napari-ome-zarr-navigator (https://github.com/fractal-napari-plugins-collection/napari-ome-zarr-navigator) streaming remote OME-Zarrs via the fractal-data service (https://github.com/fractal-analytics-platform/fractal-data). Also showcasing the napari-feature-visualization…
-    tags: [talks]
+    tags: [snippets, demos, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=eAzm10Vrhu0
 
@@ -343,7 +344,7 @@ videos:
       **Channel:** Howard Hughes Medical Institute (HHMI)
 
       John Bogovic (Janelia Machine Learning Researcher) presents "A Tour of Chunked Storage with Fiji: N5, HDF5, and Zarr."
-    tags: [talks]
+    tags: [talks, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=nYzYiXi0sYs
 
@@ -373,7 +374,7 @@ videos:
       **Channel:** Aafke Gros
 
       Microscopy Nodes is a Blender add-on for intuitive loading of microscopy data. This video illustrates how to install and use the loading interface, with either tif files or OME-Zarr files.
-    tags: [talks]
+    tags: [demos, tutorials, tools]
     sources:
       youtube: https://www.youtube.com/watch?v=ybQcKEqUG8I
 
@@ -383,6 +384,6 @@ videos:
       **Channel:** MoBIE
 
       References for the video: - Publication about various OME-Zarr tools and viewer: https://link.springer.com/article/10.1007/s00418-023-02209-1 - Tool to create OME-Zarr from many image formats: https://github.com/Euro-BioImaging/BatchConvert - MoBIE Publication:…
-    tags: [talks]
+    tags: [talks, tools, demos]
     sources:
       youtube: https://www.youtube.com/watch?v=ZJEdZfBYJQE

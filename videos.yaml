@@ -1,0 +1,36 @@
+# Catalog. Edit by hand; schema: schema/video.yaml
+sections:
+  - {tag: talks, label: Talks}
+  - {tag: snippets, label: Snippets}
+  - {tag: tutorials, label: Tutorials}
+
+videos:
+  - title: OME-Zarr in Fiji
+    date: "2026-06-12"
+    description: |
+      **Speaker:** Vladimir Ulman (CEITEC) · **Session:** Tools Exchange
+
+      From the *Euro-BioImaging Image Data Community Days 2026* (April 13–17, 2026).
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=hFd40r6vfjw
+
+  - title: "Arraylake: A Cloud-Native Data Lake Platform for Earth System Science"
+    date: "2023-10-04"
+    description: |
+      Ryan Abernathey and Joe Hamman (Earthmover) present Arraylake, a cloud-native
+      data lake for weather and climate data built on **Zarr**, with version control.
+    tags: [talks, zarr]
+    sources:
+      zenodo: https://zenodo.org/records/8423706/files/Earthmover_Oct2023.mp4
+
+  - title: Need more complex 0.6 datasets?
+    date: "2026-06-08"
+    description: |
+      Johannes Soltwedel converts a multimodal dataset (CT, dose simulation, registered MRI,
+      atlas labels, histology) into OME-Zarr 0.6 scene graphs to show transformation graphs in practice.
+    tags: [snippets, datasets]
+    sources:
+      imagesc:
+        file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/9/8/98debd528c181be8d13935b6c620fb61e9727bf9.mp4
+        post: https://forum.image.sc/search?q=%22Need%20more%20complex%200.6%20datasets%22  # TODO: replace with the thread URL

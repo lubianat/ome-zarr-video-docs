@@ -8,35 +8,53 @@
 <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 <style>
-  :root { --bg: #111; --fg: #eee; --muted: #999; --card: #222; --accent: #e50914; }
+  /* Colors after the pydata-sphinx-theme used by the NGFF docs. */
+  :root {
+    color-scheme: light;
+    --bg: #fff; --fg: #222832; --muted: #5e6671; --card: #f3f4f5; --border: #d1d5da;
+    --accent: #0a7d91; --accent-fg: #fff; --link: #0a7d91;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #14181e; --fg: #ced6dd; --muted: #9ca4af; --card: #1f252e; --border: #48566b;
+      --accent: #3fb1c5; --accent-fg: #14181e; --link: #3fb1c5;
+    }
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.4 system-ui, sans-serif; }
-  header { padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  h1 { margin: 0; font-size: 1.5rem; color: var(--accent); }
-  input[type=search] { flex: 1; min-width: 180px; padding: 8px; border-radius: 4px; border: 0; background: var(--card); color: var(--fg); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 system-ui, sans-serif; }
+  header { padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  h1 { margin: 0; font-size: 1.4rem; font-weight: 600; color: var(--fg); }
+  input[type=search] { flex: 1; min-width: 180px; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); font: inherit; }
   #chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
-  .chip { background: var(--card); color: var(--fg); border: 1px solid #444; border-radius: 99px; padding: 2px 10px; cursor: pointer; font: inherit; font-size: .85rem; }
-  .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); }
+  .chip { background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: 99px; padding: 2px 12px; cursor: pointer; font: inherit; font-size: .85rem; }
+  .chip:hover { border-color: var(--accent); }
+  .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
   section { padding: 0 16px 16px; }
-  h2 { font-size: 1.1rem; margin: 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: 600; margin: 8px 0; }
   .row.grid { flex-wrap: wrap; overflow-x: visible; }
-  .row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
-  .card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 0; border-radius: 6px; padding: 0; color: inherit; text-align: left; cursor: pointer; overflow: hidden; font: inherit; transition: transform .15s; }
-  .card:hover, .card:focus-visible { transform: scale(1.04); }
-  .thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: grid; place-items: center; background: #333; color: var(--muted); font-size: 2rem; }
-  .card b { display: block; padding: 6px 8px 0; font-size: .9rem; }
+  .row { display: flex; gap: 12px; overflow-x: auto; padding: 4px 4px 8px; scroll-snap-type: x mandatory; }
+  .card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0; color: inherit; text-align: left; cursor: pointer; overflow: hidden; font: inherit; line-height: 1.4; transition: border-color .15s, box-shadow .15s; }
+  .card:hover, .card:focus-visible { border-color: var(--accent); box-shadow: 0 2px 8px #0002; }
+  .thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: grid; place-items: center; background: var(--border); color: var(--muted); font-size: 2rem; }
+  .card b { display: block; padding: 6px 8px 0; font-size: .9rem; font-weight: 600; }
   .card small { display: block; padding: 0 8px 8px; color: var(--muted); }
-  dialog { width: min(960px, 100%); max-height: 100vh; background: var(--bg); color: var(--fg); border: 1px solid #333; border-radius: 8px; padding: 16px; }
-  dialog::backdrop { background: #000c; }
+  dialog { width: min(960px, 100%); max-height: 100vh; background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  dialog::backdrop { background: #0009; }
   #player { aspect-ratio: 16/9; background: #000; }
   #player > * { width: 100%; height: 100%; border: 0; }
   #srcs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; align-items: center; }
-  #desc a, #srcs a { color: #8ab4f8; }
+  a { color: var(--link); }
+  code { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; font-size: .9em; }
   .close { float: right; }
   details { position: relative; }
   summary { cursor: pointer; list-style: none; }
-  #opts { position: absolute; right: 0; z-index: 1; margin-top: 6px; padding: 12px; background: var(--card); border: 1px solid #444; border-radius: 6px; display: grid; gap: 8px; }
-  #opts select, #opts input { background: var(--bg); color: var(--fg); border: 1px solid #444; border-radius: 4px; padding: 4px; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] summary { border-color: var(--accent); }
+  #opts { position: absolute; right: 0; z-index: 1; margin-top: 6px; padding: 12px 14px; min-width: 220px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 4px 16px #0003; display: grid; gap: 10px; }
+  #opts label { display: grid; gap: 2px; font-size: .8rem; color: var(--muted); }
+  #opts select, #opts input { background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 6px; font: inherit; font-size: .9rem; }
+  #opts button { justify-self: end; }
   .muted { color: var(--muted); }
 </style>
 </head>
@@ -54,6 +72,7 @@
       </select></label>
       <label>From <input type="date" id="from"></label>
       <label>To <input type="date" id="to"></label>
+      <button type="button" class="chip" id="reset">Reset</button>
     </div>
   </details>
   <div id="chips"></div>
@@ -242,6 +261,7 @@ $('#dlg').addEventListener('close', () => {
   $('#player').replaceChildren();
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
 });
+$('#reset').onclick = () => { $('#sort').value = 'new'; $('#from').value = $('#to').value = ''; render(); };
 $('#q').oninput = $('#sort').onchange = $('#from').onchange = $('#to').onchange = render;
 addEventListener('hashchange', onHash);
 

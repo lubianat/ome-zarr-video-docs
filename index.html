@@ -15,11 +15,16 @@
     --accent: #0a7d91; --accent-fg: #fff; --link: #0a7d91;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       color-scheme: dark;
       --bg: #14181e; --fg: #ced6dd; --muted: #9ca4af; --card: #1f252e; --border: #48566b;
       --accent: #3fb1c5; --accent-fg: #14181e; --link: #3fb1c5;
     }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #14181e; --fg: #ced6dd; --muted: #9ca4af; --card: #1f252e; --border: #48566b;
+    --accent: #3fb1c5; --accent-fg: #14181e; --link: #3fb1c5;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 system-ui, sans-serif; }
@@ -62,6 +67,7 @@
 <header>
   <h1>OME-Zarr Video Docs</h1>
   <input type="search" id="q" placeholder="Search videos…" aria-label="Search videos">
+  <button type="button" class="chip" id="theme" aria-label="Color theme"></button>
   <details>
     <summary class="chip">⚙ Filter</summary>
     <div id="opts">
@@ -261,6 +267,22 @@ $('#dlg').addEventListener('close', () => {
   $('#player').replaceChildren();
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
 });
+// Theme: auto (follows the system) → light → dark. Remembered per browser.
+const THEMES = { auto: '◐ Auto', light: '☀ Light', dark: '☾ Dark' };
+function setTheme(name) {
+  if (name === 'auto') delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = name;
+  $('#theme').textContent = THEMES[name];
+  $('#theme').dataset.value = name;
+  try { localStorage.setItem('theme', name); } catch {}
+}
+let savedTheme = 'auto';
+try { savedTheme = localStorage.getItem('theme') || 'auto'; } catch {}
+setTheme(THEMES[savedTheme] ? savedTheme : 'auto');
+$('#theme').onclick = () => {
+  const names = Object.keys(THEMES);
+  setTheme(names[(names.indexOf($('#theme').dataset.value) + 1) % names.length]);
+};
 $('#reset').onclick = () => { $('#sort').value = 'new'; $('#from').value = $('#to').value = ''; render(); };
 $('#q').oninput = $('#sort').onchange = $('#from').onchange = $('#to').onchange = render;
 addEventListener('hashchange', onHash);

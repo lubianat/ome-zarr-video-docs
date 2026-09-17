@@ -33,6 +33,10 @@
   #srcs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; align-items: center; }
   #desc a, #srcs a { color: #8ab4f8; }
   .close { float: right; }
+  details { position: relative; }
+  summary { cursor: pointer; list-style: none; }
+  #opts { position: absolute; right: 0; z-index: 1; margin-top: 6px; padding: 12px; background: var(--card); border: 1px solid #444; border-radius: 6px; display: grid; gap: 8px; }
+  #opts select, #opts input { background: var(--bg); color: var(--fg); border: 1px solid #444; border-radius: 4px; padding: 4px; }
   .muted { color: var(--muted); }
 </style>
 </head>
@@ -40,6 +44,18 @@
 <header>
   <h1>OME-Zarr Video Docs</h1>
   <input type="search" id="q" placeholder="Search videos…" aria-label="Search videos">
+  <details>
+    <summary class="chip">⚙ Filter</summary>
+    <div id="opts">
+      <label>Sort <select id="sort">
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
+        <option value="title">Title A–Z</option>
+      </select></label>
+      <label>From <input type="date" id="from"></label>
+      <label>To <input type="date" id="to"></label>
+    </div>
+  </details>
   <div id="chips"></div>
 </header>
 <main id="rows"></main>
@@ -173,12 +189,21 @@ function openVideo(v) {
 
 let catalog, active = null;
 
+const SORTS = { // undated videos go last in both date orders
+  new: (a, b) => String(b.date || '0000').localeCompare(String(a.date || '0000')),
+  old: (a, b) => String(a.date || '9999').localeCompare(String(b.date || '9999')),
+  title: (a, b) => a.title.localeCompare(b.title),
+};
+
 function render() {
   const q = $('#q').value.toLowerCase();
+  const from = $('#from').value, to = $('#to').value;
   const vids = catalog.videos
     .filter(v => !active || (v.tags || []).includes(active))
     .filter(v => !q || [v.title, v.description, ...(v.tags || [])].join(' ').toLowerCase().includes(q))
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    .filter(v => !from || (v.date && v.date >= from)) // undated videos drop out once a range is set
+    .filter(v => !to || (v.date && v.date <= to))
+    .sort(SORTS[$('#sort').value]);
   const sections = catalog.sections || [];
   const sectionTags = new Set(sections.map(s => s.tag));
   // A selected tag shows one flat grid instead of the per-section rows.
@@ -217,7 +242,7 @@ $('#dlg').addEventListener('close', () => {
   $('#player').replaceChildren();
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
 });
-$('#q').oninput = render;
+$('#q').oninput = $('#sort').onchange = $('#from').onchange = $('#to').onchange = render;
 addEventListener('hashchange', onHash);
 
 fetch('videos.yaml')

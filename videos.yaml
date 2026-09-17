@@ -46,3 +46,13 @@ videos:
       imagesc:
         file: https://us1.discourse-cdn.com/flex015/uploads/imagej/original/3X/0/2/02d964ca583a1efb98b3a7f3e50f4c634f7fc2fb.webm
         post: https://forum.image.sc/t/ngff-weekly-dev-update-thread/110810/75
+
+  - title: "projectAxis: 2D slides into 3D"
+    date: "2026-08-17"
+    description: |
+      Johannes Soltwedel shows `projectAxis` transforms from the latest OME-Zarr spec:
+      projecting images into higher dimensions (2D → 3D).
+      Dataset from [rodare.hzdr.de/record/3131](https://rodare.hzdr.de/record/3131).
+    tags: [snippets]
+    sources:
+      bluesky: https://bsky.app/profile/jo-soltwedel.bsky.social/post/3mtbvtpzn2k2s

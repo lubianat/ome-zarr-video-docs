@@ -6,6 +6,19 @@ sections:
   - {tag: talks, label: Talks}
 
 videos:
+  - title: "SlicerOMEZarr: OME-Zarr in 3D Slicer"
+    date: "2026-09-18"
+    description: |
+      Walkthrough of [SlicerOMEZarr](https://github.com/fideus-labs/SlicerOMEZarr), a
+      [3D Slicer](https://slicer.org) extension that opens and saves OME-Zarr through
+      [ngff-zarr](https://github.com/fideus-labs/ngff-zarr): no conversion step, images larger
+      than memory (refine slice views up to full resolution), labels, time series, and multiscale writing.
+      Recorded on a public CT scan of a chameleon from the
+      [OME-Zarr Open SciVis Datasets](https://github.com/InsightSoftwareConsortium/OMEZarrOpenSciVisDatasets),
+      read from S3 (2.1 GiB at 0.09 mm). Step by step: [TUTORIAL.md](https://github.com/fideus-labs/SlicerOMEZarr/blob/main/TUTORIAL.md).
+    tags: [demos, tools, tutorials]
+    sources:
+      github: https://github.com/fideus-labs/SlicerOMEZarr/blob/main/Screenshots/SlicerOMEZarr-tutorial.mp4
   - title: OME-Zarr in Fiji
     date: "2026-06-12"
     description: |

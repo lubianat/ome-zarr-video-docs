@@ -400,3 +400,185 @@ videos:
     tags: [talks, tools, demos]
     sources:
       youtube: https://www.youtube.com/watch?v=ZJEdZfBYJQE
+
+  - title: "OME-Zarr with Sharding, Collections and Zips"
+    date: "2026-09-18"
+    description: |
+      **Speaker:** Norman Rzepka · **Session:** OME2026, Session 3: File Formats and Standardization
+
+      Updates on OME-Zarr RFCs: sharding (RFC-2), collections (RFC-8) and ZIP storage (RFC-9).
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=wg49_mouad4
+
+  - title: "From Promise to Product: Vendor Perspectives on OME-NGFF"
+    date: "2026-09-16"
+    description: |
+      **Speaker:** Sebastian Rhode · **Session:** OME2026, Session 3: File Formats and Standardization
+
+      What vendors need to make OME-NGFF operational, sustainable and scalable, drawing on OME-TIFF, Bio-Formats and CZI.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=MoXKisQlQNk
+
+  - title: "Towards FAIR bioimage analysis at scale"
+    date: "2026-09-18"
+    description: |
+      **Speaker:** Virginie Uhlmann · **Session:** OME2026, Session 3: File Formats and Standardization
+
+      ngio, a Python library for OME-Zarr, and Fractal, a platform for scalable analysis workflows on HPC.
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=ARbUkw4xCRM
+
+  - title: "OME2026 Session 3: File Formats and Standardization, Q&A"
+    date: "2026-09-18"
+    description: |
+      Q&A of the OME2026 session on file formats and standardization.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=jx0JEAkwdAM
+
+  - title: "OMERO and OME-Zarr status update"
+    date: "2026-09-18"
+    description: |
+      **Speaker:** Jean-Marie Burel · **Session:** OME2026, Session 1: Update of the OME Ecosystem
+
+      Current status of OMERO and how it evolves to support tools like BioFile Finder and formats like OME-Zarr.
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=p50b1BMdIOM
+
+  - title: "A Lean and Kind OME-Zarr Toolkit for Bioimaging"
+    date: "2026-09-01"
+    description: |
+      **Speaker:** Matt McCormick · SciPy 2026
+
+      **ngff-zarr**, a lightweight Python toolkit that converts, validates and builds multiscale OME-Zarr out-of-core with Dask.
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=eIuGbJJO-nw
+
+  - title: "Getting Started with OME-Zarr: Conversion, Visualisation, Validation and Metadata Editing"
+    date: "2026-06-12"
+    description: |
+      **Speaker:** Bugra Özdemir (Euro-BioImaging ERIC) · **Session:** Workshops
+
+      From the *Euro-BioImaging Image Data Community Days 2026* (April 13–17, 2026).
+    tags: [talks, tutorials]
+    sources:
+      youtube: https://www.youtube.com/watch?v=znNRH1bZBaI
+
+  - title: "OME-Zarr: A next generation file format for FAIR bioimaging data"
+    date: "2026-06-02"
+    description: |
+      **Speaker:** Chris Barnes · CCP-volumeEM Show and Tell Webinar (19 May 2026)
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=HsqH6RAcJps
+
+  - title: "Towards interoperable bioimage analysis at scale with OME-Zarr"
+    date: "2026-03-05"
+    description: |
+      **Speaker:** Virginie Uhlmann (BioVisionCenter, Zürich) · GloBIAS
+
+      ngio and Fractal for terabyte-scale analysis built on OME-Zarr.
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=Nb3rb89dtEY
+
+  - title: "Fractal web: Accessible workflow building & OME-Zarr data interaction"
+    date: "2026-03-09"
+    description: |
+      **Channel:** Joel Lüthi
+
+      Demo on the public [Fractal demo server](https://fractal-demo.mls.uzh.ch/): fractal-web, fractal-data and ViZarr.
+    tags: [demos, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=uhv4rSc_6gs
+
+  - title: "Fractal OME-Zarr napari plugin overview"
+    date: "2026-03-09"
+    description: |
+      **Channel:** Joel Lüthi
+
+      napari plugins with Fractal-created OME-Zarr: napari-ome-zarr, navigator, feature visualization and classifier.
+    tags: [demos, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=t2FjOSBTQHE
+
+  - title: "Understanding the Standardization Runway of OME-Zarr"
+    date: "2026-05-29"
+    description: |
+      **Speaker:** Josh Moore (Image Cooperative) · BINA Insights and Educational Tools from Industry Series (20 May 2026)
+    tags: [talks]
+    sources:
+      youtube: https://www.youtube.com/watch?v=t0vBSuomrAQ
+
+  - title: "Parallel Scientific Computing on the Web Platform"
+    date: "2026-08-13"
+    description: |
+      **Speaker:** Matt McCormick (Fideus Labs)
+
+      Lightning talk on `@fideus-labs/worker-pool`, a zero-dependency Web Worker pool for parallel computing in the browser.
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=D5NnpXxyJa8
+
+  - title: "Load Any Microscopy Data into Blender | Microscopy Nodes 3.1"
+    date: "2026-07-24"
+    description: |
+      **Channel:** Aafke Gros
+
+      Complete introduction to Microscopy Nodes 3.1: OME-Zarr and TIFF loading, multiscales, channels, volume and surface rendering, slicing, animation.
+    tags: [tutorials, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=CsunbIn3ABw
+
+  - title: "Slice, Mask & Recolor 3D Microscopy Data in Blender"
+    date: "2026-07-24"
+    description: |
+      **Channel:** Aafke Gros
+
+      Microscopy Nodes 3.1 tutorial: geometry and label masks to slice and recolor volumes.
+    tags: [tutorials, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=gIFsRT1ZGyg
+
+  - title: "Huge Microscopy Data in Blender: Load Only What You Need"
+    date: "2026-07-24"
+    description: |
+      **Channel:** Aafke Gros
+
+      Microscopy Nodes 3.1 tutorial: reload a masked region at full resolution from a multiscale OME-Zarr.
+    tags: [tutorials, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=n2w0pI7tzu8
+
+  - title: "Project Microscopy Data onto Any Mesh in Blender"
+    date: "2026-07-24"
+    description: |
+      **Channel:** Aafke Gros
+
+      Microscopy Nodes 3.1 tutorial: sample volumetric signals onto meshes with Geometry Nodes.
+    tags: [tutorials, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=3K6l0ovNFZ4
+
+  - title: "napari 3D Surface & Animation workflow"
+    date: "2026-05-03"
+    description: |
+      **Channel:** NTU Imaging Core · Python & napari course (in Mandarin), 20 April 2026
+
+      3D/5D visualisation, surface meshes, tracks and napari-animation.
+    tags: [tutorials]
+    sources:
+      youtube: https://www.youtube.com/watch?v=TBs5Dhr_Yiw
+
+  - title: "Large-scale image visualisation, annotation, sharing and management with OME-Zarr and WEBKNOSSOS"
+    date: "2026-02-02"
+    description: |
+      **Speaker:** Norman Rzepka (scalable minds) · GloBIAS
+    tags: [talks, tools]
+    sources:
+      youtube: https://www.youtube.com/watch?v=UKYzA-4QolY
